@@ -1,0 +1,60 @@
+﻿@model IEnumerable<InternetStore.Entities.Order>
+
+@{
+    ViewBag.Title = "InternetStore: Orders";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Order</th>
+            <th scope="col">Customer pasport number</th>
+            <th scope="col">Date</th>
+            <th scope="col">Product</th>
+            <th scope="col">Product Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Price of Order</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            @foreach (var order in item.OrderToProduct)
+            {
+                <tr>
+                    <td>@order.OrderId.ToString().Substring(0, 6)</td>
+                    <td>@order.Order.CustomerPassportNumber</td>
+                    <td>@order.Order.CreatedAt.ToString("dd-MM-yyyy")</td>
+                    <td>@order.Product.Name</td>
+                    <td>@order.Product.Price $</td>
+                    <td>@order.Quanity</td>
+                    <td>@order.Order.TotalPrice $</td>
+                    <td>
+                        @using (Html.BeginForm("UpdateOrder", "Order"))
+                        {
+                        <select name="status">
+                            @foreach (var status in ViewBag.Statuses)
+
+                            {
+                                if (order.Order.Status == status)
+                                {
+                                    <option selected value="@status">@status</option>
+                                }
+                                else
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            }
+                        </select>
+                            <input type="submit" class="btn btn-success" value="Save" />
+                            <input type="hidden" name ="Id" value="@order.OrderId"/>
+                         }
+                    </td>
+                </tr>
+            }
+        }
+        
+    </tbody>
+</table>

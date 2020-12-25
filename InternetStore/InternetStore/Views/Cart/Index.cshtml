@@ -1,0 +1,55 @@
+﻿@model InternetStore.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "InternetStore: ваша корзина";
+}
+
+<h2>Your cart</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product name</th>
+            <th>Quantity</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Total price</th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var line in Model.Cart.Lines)
+            {
+                <tr>
+                    <td class="text-center">@line.Quantity</td>
+                    <td class="text-left">@line.Product.Name</td>
+                    <td class="text-right">@line.Product.Price.ToString("# $")</td>
+                    <td class="text-right">
+                        @((line.Quantity * line.Product.Price).ToString("# $"))
+                    </td>
+                </tr>
+            }   
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Order total sum:</td>
+            <td class="text-right">
+                @Model.Cart.ComputeTotalValue().ToString("# $")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div style="display:flex; justify-content:space-around">
+    <a class="btn btn-primary" style="display:block" asp-controller="Product" asp-action="Index">Continue shopping</a>
+
+    @if (Model.Cart.ComputeTotalValue() != 0)
+    {
+        @using (Html.BeginForm("CreateOrder", "Order", FormMethod.Post))
+        {
+            @Html.LabelFor(m => m.CustomerPassportNumber, "Enter your passport number: ")
+            @Html.TextBoxFor(m => m.CustomerPassportNumber)
+            
+            <input type="submit" class="btn btn-success" value="Pay for order" />
+        }
+
+    }
+
+</div>

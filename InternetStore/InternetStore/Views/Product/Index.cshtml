@@ -1,0 +1,46 @@
+﻿@model IEnumerable<InternetStore.Entities.Product>
+@{
+    ViewData["Title"] = "Available Products";
+}
+
+<div class="container">
+    <div style="display:flex; justify-content: space-between">
+        <div>
+            <a style="margin-right: 20px;" asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
+            <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Price)</a>
+        </div>
+        <a style="display:block" asp-action="Index">Back to Full List</a>
+    </div>
+
+
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Product's name" name="SearchString" value="@ViewData["CurrentFilter"]">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" asp-action="Index">Search</button>
+                    </div>
+
+                </div>
+            </p>
+        </div>
+    </form>
+
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem; margin-top: 20px">
+            <div class="card-body">
+                <h5 class="card-title"> @Html.DisplayFor(entityItem => item.Name)</h5>
+                <p class="card-text">Cost: @Html.DisplayFor(entityItem => item.Price) $</p>
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    <input type="hidden" name="Id" value="@item.Id" />
+                    <input type="hidden" name="Name" value="@item.Name" />
+                    <input type="hidden" name="Price" value="@item.Price" />
+                    <input type="submit" class="btn btn-primary" value="Add to Cart" />
+                }
+            </div>
+        </div>
+    }
+</div>
