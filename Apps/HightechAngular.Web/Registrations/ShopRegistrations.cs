@@ -3,6 +3,10 @@ using HightechAngular.Orders.Services;
 using HightechAngular.Shop.Features.Cart;
 using HightechAngular.Shop.Features.Catalog;
 using HightechAngular.Shop.Features.Index;
+using HightechAngular.Web.Features.Index;
+using HightechAngular.Web.Features.Index.Controller.GetNewArrivals;
+using HightechAngular.Web.Features.Index.GetBestsellers;
+using HightechAngular.Web.Features.Index.GetSale;
 using Infrastructure.SwaggerSchema.Dropdowns.Providers;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,9 +18,9 @@ namespace HightechAngular.Shop
         {
             services.AddScoped<ICartStorage, CartStorage>();
             services.AddScoped<IDropdownProvider<ProductListItem>, ProductsDropdownProvider>();
-            services.AddScoped<IDropdownProvider<BestsellersListItem>, BestsellersDropdownProvider>();
-            services.AddScoped<IDropdownProvider<NewArrivalsListItem>, NewArrivalsDropdownProvider>();
-            services.AddScoped<IDropdownProvider<SaleListItem>, SaleListDropdownProvider>();
+            services.AddScoped<IDropdownProvider<GetBestsellersListItem>, BestsellersDropdownProvider>();
+            services.AddScoped<IDropdownProvider<GetNewArrivalsListItem>, NewArrivalsDropdownProvider>();
+            services.AddScoped<IDropdownProvider<GetSaleListItem>, SaleListDropdownProvider>();
             services.AddScoped<IDropdownProvider<CartItem>, CartDropdownProvider>();
         }
     }

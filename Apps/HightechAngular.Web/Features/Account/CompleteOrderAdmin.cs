@@ -1,6 +1,6 @@
 using HightechAngular.Orders.Base;
 
-namespace HightechAngular.Admin.Features.OrderManagement
+namespace HightechAngular.Web.Features.Account
 {
     public class CompleteOrderAdmin: ChangeOrderStateBase
     {

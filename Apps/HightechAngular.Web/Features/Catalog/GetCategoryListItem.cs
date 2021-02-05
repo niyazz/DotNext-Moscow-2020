@@ -1,6 +1,6 @@
 using Force.Ddd;
 
-namespace HightechAngular.Shop.Features.Catalog
+namespace HightechAngular.Web.Features.Catalog
 {
     public class CategoryListItem: HasNameBase
     {

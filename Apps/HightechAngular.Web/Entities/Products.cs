@@ -1,5 +1,6 @@
 using System.Linq;
 using Force.Cqrs;
+using HightechAngular.Web.Features.Index;
 
 namespace HightechAngular.Shop.Features.Catalog
 {

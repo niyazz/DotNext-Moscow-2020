@@ -1,7 +1,7 @@
 using HightechAngular.Orders.Base;
 using HightechAngular.Orders.Entities;
 
-namespace HightechAngular.Admin.Features.OrderManagement
+namespace HightechAngular.Web.Features.Account
 {
     public class ShipOrder: ChangeOrderStateBase
     {
