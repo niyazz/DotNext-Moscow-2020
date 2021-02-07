@@ -1,11 +1,13 @@
 using System.Linq;
 using HightechAngular.Orders.Entities;
+using HightechAngular.Shop.Features.Catalog;
+using HightechAngular.Web.Features.Index;
 using Infrastructure.AspNetCore;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HightechAngular.Shop.Features.Catalog
+namespace HightechAngular.Web.Features.Catalog
 {
     public class CatalogController: ApiControllerBase
     {

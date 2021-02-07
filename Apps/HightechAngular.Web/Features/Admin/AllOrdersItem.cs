@@ -5,7 +5,7 @@ using Force.Ddd;
 using HightechAngular.Orders.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HightechAngular.Admin.Features.OrderManagement
+namespace HightechAngular.Web.Features.Admin
 {
     public class AllOrdersItem : HasIdBase
     {

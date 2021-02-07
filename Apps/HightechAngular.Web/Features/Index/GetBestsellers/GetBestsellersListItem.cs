@@ -3,16 +3,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using Force.Ddd;
 using HightechAngular.Orders.Entities;
+using HightechAngular.Web.Features.Index.GetSale;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HightechAngular.Shop.Features.Index
+namespace HightechAngular.Web.Features.Index.GetBestsellers
 {
-    public class BestsellersListItem: HasIdBase
+    public class GetBestsellersListItem: HasIdBase
     {
-        static BestsellersListItem()
+        static GetBestsellersListItem()
         {
-            TypeAdapterConfig<Product, SaleListItem>
+            TypeAdapterConfig<Product, GetSaleListItem>
                 .NewConfig()
                 .Map(dest => dest.Price, Product.DiscountedPriceExpression)
                 .Map(dest => dest.DateCreatedName, src => src.DateCreated.ToString("d"));

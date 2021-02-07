@@ -5,12 +5,13 @@ using Force.Ccc;
 using HightechAngular.Identity.Services;
 using HightechAngular.Orders.Entities;
 using HightechAngular.Orders.Services;
+using HightechAngular.Web.Features.Cart;
 using Infrastructure.AspNetCore;
 using Infrastructure.Cqrs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HightechAngular.Shop.Features.MyOrders
+namespace HightechAngular.Web.Features.Account
 {
     public class MyOrdersController : ApiControllerBase
     {

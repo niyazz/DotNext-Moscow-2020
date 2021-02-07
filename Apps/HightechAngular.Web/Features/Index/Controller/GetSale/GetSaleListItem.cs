@@ -6,13 +6,13 @@ using HightechAngular.Orders.Entities;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HightechAngular.Shop.Features.Index
+namespace HightechAngular.Web.Features.Index.GetSale
 {
-    public class SaleListItem: HasIdBase
+    public class GetSaleListItem: HasIdBase
     {
-        static SaleListItem()
+        static GetSaleListItem()
         {
-            TypeAdapterConfig<Product, SaleListItem>
+            TypeAdapterConfig<Product, GetSaleListItem>
                 .NewConfig()
                 .Map(dest => dest.Price, Product.DiscountedPriceExpression)
                 .Map(dest => dest.DateCreatedName, src => src.DateCreated.ToString("d"));
