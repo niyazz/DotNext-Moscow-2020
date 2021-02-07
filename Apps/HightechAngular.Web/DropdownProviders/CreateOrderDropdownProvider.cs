@@ -6,7 +6,7 @@ using Infrastructure.SwaggerSchema.Dropdowns.Providers;
 
 namespace HightechAngular.Admin.Features.OrderManagement
 {
-    public class CreateOrderDropdownProvider : IDropdownProvider<AllOrdersItem>
+    public class CreateOrderDropdownProvider : IDropdownProvider<GetAllOrdersListItem>
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -17,7 +17,7 @@ namespace HightechAngular.Admin.Features.OrderManagement
 
         public Task<Dropdowns> GetDropdownOptionsAsync()
         {
-            return _serviceProvider.DropdownsFor<AllOrdersItem>();
+            return _serviceProvider.DropdownsFor<GetAllOrdersListItem>();
         }
     }
 }

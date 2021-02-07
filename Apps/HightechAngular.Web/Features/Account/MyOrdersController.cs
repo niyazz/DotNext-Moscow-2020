@@ -6,6 +6,7 @@ using HightechAngular.Identity.Services;
 using HightechAngular.Orders.Entities;
 using HightechAngular.Orders.Services;
 using HightechAngular.Web.Features.Cart;
+using HightechAngular.Web.Features.Shared;
 using Infrastructure.AspNetCore;
 using Infrastructure.Cqrs;
 using Microsoft.AspNetCore.Authorization;
@@ -15,70 +16,25 @@ namespace HightechAngular.Web.Features.Account
 {
     public class MyOrdersController : ApiControllerBase
     {
-        private readonly IQueryable<Order> _orders;
-        private readonly IUserContext _userContext;
-        private readonly ICartStorage _cartStorage;
-        private readonly IUnitOfWork _unitOfWork;
-
-        public MyOrdersController(IQueryable<Order> orders, 
-            IUserContext userContext, 
-            ICartStorage cartStorage, 
-            IUnitOfWork unitOfWork)
-        {
-            _orders = orders;
-            _userContext = userContext;
-            _cartStorage = cartStorage;
-            _unitOfWork = unitOfWork;
-        }
-
         [HttpPost("CreateNew")]
         [Authorize]
-        public ActionResult<int> CreateNew([FromBody] CreateOrder query)
-        {
-            var order = new Order(_cartStorage.Cart);
-
-            _unitOfWork.Add(order);
-            _cartStorage.EmptyCart();
-            _unitOfWork.Commit();
-
-            return Ok(order.Id);
-        }
+        public ActionResult<int> CreateNew([FromBody] CreateOrderCommand command) 
+            => this.Process(command);
 
         [HttpGet("GetMyOrders")]
-        public ActionResult<IEnumerable<OrderListItem>> GetMyOrders([FromQuery] GetMyOrders query)
-        {
-            var orders = _orders
-                .Where(Order.Specs.ByUserName(_userContext.User?.UserName))
-                .Select(OrderListItem.Map);
-            return Ok(orders);
-        }
+        public ActionResult<IEnumerable<OrderListItem>> GetMyOrders([FromQuery] GetMyOrdersQuery query)
+            => this.Process(query);
 
         [HttpPut("Dispute")]
-        public async Task<IActionResult> Dispute([FromBody] DisputeOrder command)
-        {
-            var order = _orders.First(x => x.Id == command.OrderId);
-            await Task.Delay(1000);
-            var result = order.BecomeDispute();
-            return Ok(new HandlerResult<OrderStatus>(result));
-        }
+        public async Task<IActionResult> Dispute([FromBody] DisputeOrderCommand command)
+            => await this.ProcessAsync(command);
 
         [HttpPut("Complete")]
-        public async Task<IActionResult> Complete([FromBody] CompleteOrder command)
-        {
-            var order = _orders.First(x => x.Id == command.OrderId);
-            await Task.Delay(1000);
-            var result = order.BecomeComplete();
-            return Ok(new HandlerResult<OrderStatus>(result));
-        }
+        public async Task<IActionResult> Complete([FromBody] CompleteOrderCommand command)
+            => await this.ProcessAsync(command);
 
         [HttpPut("PayOrder")]
-        public async Task<IActionResult> PayOrder([FromBody] PayMyOrder command)
-        {
-            var order = _orders.First(x => x.Id == command.OrderId);
-            await Task.Delay(1000);
-            var result = order.BecomePaid();
-            _unitOfWork.Commit();
-            return Ok(new HandlerResult<OrderStatus>(result));
-        }
+        public async Task<IActionResult> PayOrder([FromBody] PayMyOrderCommand command)
+            => await this.ProcessAsync(command);
     }
 }

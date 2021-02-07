@@ -11,31 +11,12 @@ namespace HightechAngular.Web.Features.Catalog
 {
     public class CatalogController: ApiControllerBase
     {
-        private readonly IQueryable<Category> _categories;
-        private readonly IQueryable<Product> _products;
-
-        public CatalogController(IQueryable<Category> categories, 
-            IQueryable<Product> products)
-        {
-            _categories = categories;
-            _products = products;
-        }
-
         [HttpGet]
         [ProducesResponseType(typeof(ProductListItem), StatusCodes.Status200OK)]
         public IActionResult Get([FromQuery] GetProducts query)
-        {
-            var products = _products
-                .Where(x => x.Category.Id == query.CategoryId)
-                .ProjectToType<ProductListItem>();
-            return Ok(products);
-        }
-        
+            => this.Process(query);
 
         [HttpGet("GetCategories")]
-        public IActionResult GetCategories()
-        {
-            return Ok(_categories);
-        }
+        public IActionResult GetCategories() => this.Process(new GetCategoriesQuery());
     }
 }

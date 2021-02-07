@@ -5,8 +5,8 @@ using Infrastructure.Cqrs;
 
 namespace HightechAngular.Web.Features.Account
 {
-    public class PayMyOrder: ICommand<Task<HandlerResult<OrderStatus>>>
+    public class PayMyOrderCommand: ICommand<Task<HandlerResult<OrderStatus>>>
     {
-        public int   OrderId { get; set; }
+        public int OrderId { get; set; }
     }
 }

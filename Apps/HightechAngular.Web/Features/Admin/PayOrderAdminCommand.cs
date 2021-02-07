@@ -7,7 +7,7 @@ using Infrastructure.Cqrs;
 
 namespace HightechAngular.Web.Features.Admin
 {
-    public class PayOrder : HasIdBase, ICommand<Task<HandlerResult<OrderStatus>>>
+    public class PayOrderAdminCommand : HasIdBase, ICommand<Task<HandlerResult<OrderStatus>>>
     {
         public int OrderId { get; set; } 
     }

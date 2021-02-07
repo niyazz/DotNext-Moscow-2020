@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HightechAngular.Web.Features.Admin
 {
-    public class AllOrdersItem : HasIdBase
+    public class GetAllOrdersListItem : HasIdBase
     {
-        public static readonly Expression<Func<Order, AllOrdersItem>> Map = x => new AllOrdersItem()
+        public static readonly Expression<Func<Order, GetAllOrdersListItem>> Map = x => new GetAllOrdersListItem()
         {
             Id = x.Id,
             Total = x.Total,
