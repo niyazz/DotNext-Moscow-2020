@@ -64,6 +64,10 @@
       <Content Remove="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\..\HightechAngular.Account\HightechAngular.Account.csproj" />
+      <ProjectReference Include="..\..\HightechAngular.Admin\HightechAngular.Admin.csproj" />
+      <ProjectReference Include="..\..\HightechAngular.Core\HightechAngular.Core.csproj" />
+      <ProjectReference Include="..\..\HightechAngular.Shop\HightechAngular.Shop.csproj" />
       <ProjectReference Include="..\..\infrastructure\Infrastructure\Infrastructure.csproj" />
       <ProjectReference Include="..\..\infrastructure\SwaggerSchema\SwaggerSchema.csproj" />
     </ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HightechAngular.Web.Features.Index;
-using HightechAngular.Web.Features.Index.GetSale;
+using HightechAngular.Shop.Features.Index.GetSale;
 using Infrastructure.SwaggerSchema.Dropdowns;
 using Infrastructure.SwaggerSchema.Dropdowns.Providers;
 

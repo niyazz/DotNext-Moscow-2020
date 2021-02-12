@@ -1,4 +1,4 @@
-﻿using HightechAngular.Identity.Entities;
+﻿using HightechAngular.Core.Entities;
 using HightechAngular.Orders.Entities;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
