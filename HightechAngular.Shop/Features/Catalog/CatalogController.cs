@@ -12,7 +12,7 @@ namespace HightechAngular.Shop.Features.Catalog
     {
         [HttpGet]
         [ProducesResponseType(typeof(ProductListItem), StatusCodes.Status200OK)]
-        public IActionResult Get([FromQuery] GetProducts query)
+        public IActionResult Get([FromQuery] GetProductsQuery query)
             => this.Process(query);
 
         [HttpGet("GetCategories")]

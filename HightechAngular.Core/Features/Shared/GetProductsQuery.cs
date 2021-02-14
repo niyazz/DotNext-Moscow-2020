@@ -2,14 +2,14 @@ using System.Linq;
 using Force.Cqrs;
 using HightechAngular.Core.Features.Shared;
 
-namespace HightechAngular.Core.Entities
+namespace HightechAngular.Core.Features.Shared
 {
-    public class GetProducts: FilterQuery<ProductListItem>
+    public class GetProductsQuery: FilterQuery<ProductListItem>
     {
         public string[] Name { get; set; }
         public double[] Price { get; set; }
         public int CategoryId { get; set; }
-        public GetProducts()
+        public GetProductsQuery()
         {
             Order = "Id";
             CategoryId = 1;

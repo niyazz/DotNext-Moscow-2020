@@ -5,16 +5,16 @@ using Infrastructure.Ddd;
 
 namespace HightechAngular.Core.Entities
 {
-    public class Cart: EntityBase<Guid>
+    public sealed class Cart: EntityBase<Guid>
     {
-        public Cart(User user)
+        internal Cart(User user)
         {
             User = user;
             Id = Guid.NewGuid();
             _cartItems = new List<CartItem>();
         }
 
-        public Cart(Guid id, IEnumerable<CartItem> cartItems, User user)
+        internal Cart(Guid id, IEnumerable<CartItem> cartItems, User user)
         {
             User = user;
             Id = id;

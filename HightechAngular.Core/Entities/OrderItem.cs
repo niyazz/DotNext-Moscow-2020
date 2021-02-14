@@ -8,11 +8,11 @@ namespace HightechAngular.Core.Entities
     public class OrderItem: IntEntityBase
     {
         [UsedImplicitly]
-        public OrderItem()
+        protected OrderItem()
         {
         }
 
-        public OrderItem(Order order, CartItem cartItem)
+        internal OrderItem(Order order, CartItem cartItem)
         {
             // ReSharper disable once VirtualMemberCallInConstructor
             Order = order;

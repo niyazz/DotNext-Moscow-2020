@@ -13,7 +13,7 @@ namespace HightechAngular.Core.Entities
     {
         public static readonly OrderSpecs Specs = new OrderSpecs();
 
-        public Order()
+        protected Order()
         {
         }
 
@@ -59,20 +59,20 @@ namespace HightechAngular.Core.Entities
         }
 
         [Required]
-        public virtual User User { get; set; }
+        public virtual User User { get; protected set; }
 
-        public DateTime Created { get; set; } = DateTime.UtcNow;
+        public DateTime Created { get; protected set; } = DateTime.UtcNow;
         
-        public DateTime Updated { get; set; }
+        public DateTime Updated { get; protected set; }
         
         private List<OrderItem> _orderItems = new List<OrderItem>();
        // public IEnumerable<OrderItem> OrderItems => _orderItems;
        public virtual IEnumerable<OrderItem> OrderItems => _orderItems;
         
-        public double Total { get; set; }
+        public double Total { get; protected set; }
         
-        public Guid? TrackingCode { get; set; }
+        public Guid? TrackingCode { get; protected set; }
         
-        public OrderStatus Status { get; set; }
+        public OrderStatus Status { get; protected set; }
     }
 }
