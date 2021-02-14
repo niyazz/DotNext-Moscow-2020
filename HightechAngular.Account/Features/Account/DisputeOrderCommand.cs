@@ -4,6 +4,6 @@ namespace HightechAngular.Account.Features.Account
 {
     public class DisputeOrderCommand : ChangeOrderStateBase
     {
-        public int   OrderId { get; set; }
+        public int OrderId { get; set; }
     }
 }
