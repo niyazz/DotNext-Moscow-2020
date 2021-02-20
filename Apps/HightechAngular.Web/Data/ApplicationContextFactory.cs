@@ -46,7 +46,7 @@ namespace HightechAngular.Data
  
             private class MyLogger : ILogger
             {
-                public IDisposable BeginScope<TState>(TState state)
+                public IDisposable? BeginScope<TState>(TState state)
                 {
                     return null;
                 }

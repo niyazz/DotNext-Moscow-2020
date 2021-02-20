@@ -14,10 +14,10 @@ namespace HightechAngular.Core.Entities
         public int ProductId { get; set; }
 
         [Display(Name = "Name")]
-        public string ProductName { get; set; }
-        
+        public string ProductName { get; set; } = default!;
+
         [Display(Name = "Category")]
-        public string CategoryName { get; set; }
+        public string CategoryName { get; set; } = default!;
 
         [Display(Name = "Price")]
         public double Price { get; set; }

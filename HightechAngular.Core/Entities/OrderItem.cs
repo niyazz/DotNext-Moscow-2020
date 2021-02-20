@@ -23,11 +23,11 @@ namespace HightechAngular.Core.Entities
         }
         
         [Required]
-        public string Name { get; set; }
-        
-        public virtual Order Order { get; set; }
-        
-        public double Price { get; set; }
+        public string Name { get; set; } = default!;
+
+        public virtual Order Order { get; set; } = default!;
+
+        public double Price { get; set; } 
         
         [Obsolete]
         public int DiscountPercent { get; set; }

@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using Force.Extensions;
 using HightechAngular.Core.Entities;
 using HightechAngular.Core.Services;
+using HightechAngular.Shop.Features.Cart.Add;
+using HightechAngular.Shop.Features.Cart.Remove;
 using Infrastructure.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,12 +19,16 @@ namespace HightechAngular.Shop.Features.Cart
 
         [HttpPut("Add")]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public IActionResult Add([FromBody] int productId) =>  
-            this.Process(new AddCartItem(productId));
+        public IActionResult Add(
+            [FromBody] int productId,
+            [FromServices] Func<AddCartItemCommand, AddCartItemContext> factory) =>  
+            this.Process(factory(new AddCartItemCommand(productId)));
         
 
         [HttpPut("Remove")]
-        public ActionResult<bool> Remove([FromBody] int productId) =>
-            this.Process(new RemoveCartItem(productId));
+        public ActionResult<bool> Remove(
+            [FromBody] int productId,
+            [FromServices] Func<RemoveCartItemCommand, RemoveCartItemContext> factory) =>
+            this.Process(factory(new RemoveCartItemCommand(productId)));
     }
 }

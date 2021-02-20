@@ -39,7 +39,7 @@ namespace HightechAngular.Core.Entities
         }
 
         [Required] 
-        public string Name { get; protected set; }
+        public string Name { get; protected set; } = default!;
 
         public double Price { get; protected set; }
 
@@ -47,9 +47,9 @@ namespace HightechAngular.Core.Entities
 
         public DateTime DateCreated { get; protected set; }
 
-        public virtual Category Category { get; protected set; }
+        public virtual Category Category { get; protected set; } = default!;
 
-        public int PurchaseCount { get; protected set; }
+        public int PurchaseCount { get; set; }
 
         public double GetDiscountedPrice()
         {

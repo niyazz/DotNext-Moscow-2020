@@ -3,10 +3,10 @@ using Force.Ddd;
 
 namespace HightechAngular.Shop.Features.Cart
 {
-    public class RemoveCartItem : HasIdBase, ICommand<bool>
+    public class RemoveCartItemCommand : HasIdBase, ICommand<bool>
     {
         public int ProductId;
-        public RemoveCartItem(int productId)
+        public RemoveCartItemCommand(int productId)
         {
             ProductId = productId;
         }

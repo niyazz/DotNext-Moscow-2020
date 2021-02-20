@@ -11,7 +11,7 @@ namespace HightechAngular.Core.Services
             CartItems = cart.CartItems.ToList()
         };
 
-        public static Cart FromDto(this CartDto dto, User user)
+        public static Cart? FromDto(this CartDto dto, User user)
         {
             if (dto == null) return null;
             return new Cart(dto.Id, dto.CartItems, user);

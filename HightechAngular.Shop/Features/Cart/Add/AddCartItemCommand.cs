@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace HightechAngular.Shop.Features.Cart
 {
-    public class AddCartItem : HasIdBase, ICommand
+    public class AddCartItemCommand : HasIdBase, ICommand
     {
         public int ProductId;
 
-        public AddCartItem(int productId)
+        public AddCartItemCommand(int productId)
         {
             ProductId = productId;
         }  

@@ -7,24 +7,20 @@ using System.Threading.Tasks;
 
 namespace HightechAngular.Account.Features.Account
 {
-    public class PayMyOrderCommandHandler : ICommandHandler<PayMyOrderCommand, Task<HandlerResult<OrderStatus>>>
+    public class PayMyOrderCommandHandler : ICommandHandler<PayMyOrderContext, Task<HandlerResult<OrderStatus>>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IQueryable<Order> _orders;
 
         public PayMyOrderCommandHandler(
-            IUnitOfWork unitOfWork,
-            IQueryable<Order> orders)
+            IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _orders = orders;
         }
 
-        public async Task<HandlerResult<OrderStatus>> Handle(PayMyOrderCommand input)
+        public async Task<HandlerResult<OrderStatus>> Handle(PayMyOrderContext input)
         {
-            var order = _orders.First(x => x.Id == input.OrderId);
             await Task.Delay(1000);
-            var result = order.BecomePaid();
+            var result = input.Order.BecomePaid();
             _unitOfWork.Commit();
             return new HandlerResult<OrderStatus>(result);
         }

@@ -8,14 +8,14 @@ namespace HightechAngular.Web.Pages
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class ErrorModel : PageModel
     {
-        private readonly ILogger<ErrorModel> _logger;
+        private readonly ILogger<ErrorModel> _logger  = default!;
 
         public ErrorModel(ILogger<ErrorModel> logger)
         {
             _logger = logger;
         }
 
-        public string RequestId { get; set; }
+        public string RequestId { get; set; } = default!;
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 

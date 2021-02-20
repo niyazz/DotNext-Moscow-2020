@@ -29,28 +29,28 @@ namespace HightechAngular.Web.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModel Input { get; set; } = default!;
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public IList<AuthenticationScheme> ExternalLogins { get; set; } = default!;
 
-        public string ReturnUrl { get; set; }
+        public string ReturnUrl { get; set; } = default!;
 
         [TempData]
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; } = default!;
 
         public class InputModel
         {
             [Required(ErrorMessage = "Введите никнейм или электронную почту")]
             [Display(Name = "Никнейм/электронная почта")]
-            public string Login { get; set; }
+            public string Login { get; set; } = default!;
 
             [Required(ErrorMessage = "Введите пароль")]
             [DataType(DataType.Password)]
             [Display(Name = "Пароль")]
-            public string Password { get; set; }
+            public string Password { get; set; } = default!;
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string? returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
@@ -67,7 +67,7 @@ namespace HightechAngular.Web.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
 

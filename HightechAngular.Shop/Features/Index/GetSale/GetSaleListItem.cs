@@ -21,11 +21,11 @@ namespace HightechAngular.Shop.Features.Index.GetSale
         public override int Id { get; set; }
         
         [Display(Name = "Name")]
-        public string Name { get; set; }
-        
+        public string Name { get; set; } = default!;
+
         [Display(Name = "Category")]
-        public string CategoryName { get; set; }
-        
+        public string CategoryName { get; set; } = default!;
+
         [Display(Name = "Price")]
         public double Price { get; set; }
         
@@ -33,8 +33,8 @@ namespace HightechAngular.Shop.Features.Index.GetSale
         public int DiscountPercent { get; set; }
         
         [Display(Name = "Date Created")]
-        public string DateCreatedName { get; set; }
-        
+        public string DateCreatedName { get; set; } = default!;
+
         [HiddenInput]
         public DateTime DateCreated { get; set; }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HightechAngular.Core.Features.Shared;
@@ -19,15 +20,21 @@ namespace HightechAngular.Account.Features.Account
             => this.Process(query);
 
         [HttpPut("Dispute")]
-        public async Task<IActionResult> Dispute([FromBody] DisputeOrderCommand command)
-            => await this.ProcessAsync(command);
+        public async Task<IActionResult> Dispute(
+            [FromBody] DisputeOrderCommand command,
+            [FromServices] Func<DisputeOrderCommand, DisputeOrderContext> factory)
+            => await this.ProcessAsync(factory(command));
 
         [HttpPut("Complete")]
-        public async Task<IActionResult> Complete([FromBody] CompleteOrderCommand command)
-            => await this.ProcessAsync(command);
+        public async Task<IActionResult> Complete(
+            [FromBody] CompleteOrderCommand command,
+            [FromServices] Func<CompleteOrderCommand, CompleteOrderContext> factory)
+            => await this.ProcessAsync(factory(command));
 
         [HttpPut("PayOrder")]
-        public async Task<IActionResult> PayOrder([FromBody] PayMyOrderCommand command)
-            => await this.ProcessAsync(command);
+        public async Task<IActionResult> PayOrder(
+            [FromBody] PayMyOrderCommand command,
+            [FromServices] Func<PayMyOrderCommand, PayMyOrderContext> factory)
+            => await this.ProcessAsync(factory(command));
     }
 }
