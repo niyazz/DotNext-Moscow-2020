@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HightechAngular.Web.Features.Account;
+using HightechAngular.Core.Features.Shared;
 using Infrastructure.SwaggerSchema.Dropdowns;
 using Infrastructure.SwaggerSchema.Dropdowns.Providers;
 

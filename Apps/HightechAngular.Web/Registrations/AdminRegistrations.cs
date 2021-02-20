@@ -1,7 +1,7 @@
+using HightechAngular.Admin.Features.Admin;
 using HightechAngular.Admin.Features.OrderManagement;
+using HightechAngular.Core.Features.Shared;
 using HightechAngular.Shop.Features.MyOrders;
-using HightechAngular.Web.Features.Account;
-using HightechAngular.Web.Features.Admin;
 using Infrastructure.SwaggerSchema.Dropdowns.Providers;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,9 +11,9 @@ namespace HightechAngular.Admin
     {
         public static void RegisterAdmin(this IServiceCollection services)
         {
-            services.AddScoped<IDropdownProvider<PayOrder>, PayOrderDropdownProvider>();
+            services.AddScoped<IDropdownProvider<PayOrderAdminCommand>, PayOrderDropdownProvider>();
             services.AddScoped<IDropdownProvider<OrderListItem>, OrderListItemDropdownProvider>();
-            services.AddScoped<IDropdownProvider<AllOrdersItem>, CreateOrderDropdownProvider>();
+            services.AddScoped<IDropdownProvider<GetAllOrdersListItem>, CreateOrderDropdownProvider>();
         }
     }
 }

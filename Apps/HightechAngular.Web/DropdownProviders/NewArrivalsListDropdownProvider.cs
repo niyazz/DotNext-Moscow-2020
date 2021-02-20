@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HightechAngular.Web.Features.Index;
-using HightechAngular.Web.Features.Index.Controller.GetNewArrivals;
+using HightechAngular.Shop.Features.Index.Controller.GetNewArrivals;
 using Infrastructure.SwaggerSchema.Dropdowns;
 using Infrastructure.SwaggerSchema.Dropdowns.Providers;
 

@@ -1,12 +1,12 @@
-using HightechAngular.Orders.Entities;
-using HightechAngular.Orders.Services;
+using HightechAngular.Core.Entities;
+using HightechAngular.Core.Features.Shared;
+using HightechAngular.Core.Services;
 using HightechAngular.Shop.Features.Cart;
 using HightechAngular.Shop.Features.Catalog;
 using HightechAngular.Shop.Features.Index;
-using HightechAngular.Web.Features.Index;
-using HightechAngular.Web.Features.Index.Controller.GetNewArrivals;
-using HightechAngular.Web.Features.Index.GetBestsellers;
-using HightechAngular.Web.Features.Index.GetSale;
+using HightechAngular.Shop.Features.Index.Controller.GetNewArrivals;
+using HightechAngular.Shop.Features.Index.GetBestsellers;
+using HightechAngular.Shop.Features.Index.GetSale;
 using Infrastructure.SwaggerSchema.Dropdowns.Providers;
 using Microsoft.Extensions.DependencyInjection;
 

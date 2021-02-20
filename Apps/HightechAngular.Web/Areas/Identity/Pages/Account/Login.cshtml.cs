@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using HightechAngular.Identity;
-using HightechAngular.Identity.Entities;
+using HightechAngular.Core.Entities;
 
 namespace HightechAngular.Web.Areas.Identity.Pages.Account
 {
