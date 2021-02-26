@@ -9,7 +9,7 @@ using Infrastructure.Ddd.Domain.State;
 namespace HightechAngular.Core.Entities
 {
     // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
-    public class Order : HasIdBase
+    public partial class Order : HasIdBase
     {
         public static readonly OrderSpecs Specs = new OrderSpecs();
 
@@ -35,28 +35,7 @@ namespace HightechAngular.Core.Entities
             Total = _orderItems.Select(x => x.Price).Sum();
             Status = OrderStatus.New;
         }
-        public OrderStatus BecomePaid()
-        {
-            Status = OrderStatus.Paid;
-            return Status;
-        }
-        public OrderStatus BecomeShipped()
-        {
-            Status = OrderStatus.Shipped;
-            return Status;
-        }
         
-        public OrderStatus BecomeDispute()
-        {
-            Status = OrderStatus.Dispute;
-            return Status;
-        }
-        
-        public OrderStatus BecomeComplete()
-        {
-            Status = OrderStatus.Complete;
-            return Status;
-        }
 
         [Required]
         public virtual User User { get; protected set; } = default!;
@@ -74,5 +53,10 @@ namespace HightechAngular.Core.Entities
         public Guid? TrackingCode { get; protected set; }
         
         public OrderStatus Status { get; protected set; }
+
+        public OrderStates GetState()
+        {
+            return new OrderStates(this).Create();
+        }
     }
 }
