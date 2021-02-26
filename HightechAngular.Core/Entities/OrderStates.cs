@@ -25,6 +25,7 @@ namespace HightechAngular.Core.Entities
                      OrderStatus.Shipped => new Shipped(order),
                      OrderStatus.Complete => new Complete(order),
                      OrderStatus.Dispute => new Dispute(order),
+                     _ => throw new NotImplementedException($"Not supported status: {order.Status}"),
                  };
 
             public class New : OrderStates

@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace IdentityMvcMetanit
 {
@@ -25,10 +27,27 @@ namespace IdentityMvcMetanit
         {
             string connect = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<UserContext>(op => op.UseSqlServer(connect));
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
+            /* services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                 .AddCookie(options =>
+                 {
+                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                 });*/ // cookie auth
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
                 {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = AuthOptions.ISSUER,
+                        ValidateAudience = true,
+                        ValidAudience = AuthOptions.AUDIENCE,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey()
+                    };
+                    
                 });
             services.AddControllersWithViews();
         }
