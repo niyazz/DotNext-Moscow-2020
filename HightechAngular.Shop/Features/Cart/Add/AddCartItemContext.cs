@@ -1,18 +1,13 @@
 ﻿using Force.Cqrs;
+using HightechAngular.Core.Base;
 using HightechAngular.Core.Entities;
 using Infrastructure.OperationContext;
 using System.ComponentModel.DataAnnotations;
 
 namespace HightechAngular.Shop.Features.Cart.Add
 {
-    public class AddCartItemContext : OperationContextBase<AddCartItemCommand>, ICommand
+    public class AddCartItemContext : BaseCartContext<AddCartItemCommand>, ICommand
     {
-        [Required]
-        public Product Product { get; }
-
-        public AddCartItemContext(AddCartItemCommand request, Product product) : base(request)
-        {
-            Product = product;
-        }
+        public AddCartItemContext(AddCartItemCommand request, Product product) : base(request, product) {}
     }
 }

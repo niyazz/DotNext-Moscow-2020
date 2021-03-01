@@ -20,9 +20,10 @@ namespace HightechAngular.Account.Features.Account
         public async Task<HandlerResult<OrderStatus>> Handle(PayMyOrderContext input)
         {
             await Task.Delay(1000);
-            var result = input.Order.BecomePaid();
+            var newState = new Order.OrderStates.New(input.Order);
+            newState.BecomePaid();
             _unitOfWork.Commit();
-            return new HandlerResult<OrderStatus>(result);
+            return new HandlerResult<OrderStatus>(input.Order.Status);
         }
     }
 }

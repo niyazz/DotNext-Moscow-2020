@@ -11,7 +11,7 @@ namespace IdentityMvcMetanit
     {
         public const string ISSUER = "MyAuthServer";
         public const string AUDIENCE = "MyAuthClient";
-        const string KEY = "keytosecret";
+        const string KEY = "mysupersecret_secretkey!123";
         public const int LIFETIME = 1;
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {

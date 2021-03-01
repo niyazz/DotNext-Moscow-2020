@@ -19,9 +19,9 @@ namespace HightechAngular.Data
         {
         }
 
-        public virtual DbSet<Product> Products { get; set; } = default!;
-        public virtual DbSet<Category> Categories { get; set; } = default!;
-        public virtual DbSet<Order> Orders { get; set; } = default!;
-        public virtual DbSet<OrderItem> OrderItems { get; set; } = default!;
+        public virtual DbSet<Product> Products => Set<Product>();
+        public virtual DbSet<Category> Categories => Set<Category>();
+        public virtual DbSet<Order> Orders => Set<Order>();
+        public virtual DbSet<OrderItem> OrderItems => Set<OrderItem>();
     }
 }

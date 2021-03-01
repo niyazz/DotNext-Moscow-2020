@@ -1,4 +1,5 @@
 ﻿using Force.Cqrs;
+using HightechAngular.Core.Base;
 using HightechAngular.Core.Entities;
 using Infrastructure.Cqrs;
 using Infrastructure.OperationContext;
@@ -7,16 +8,8 @@ using System.Threading.Tasks;
 
 namespace HightechAngular.Account.Features.Account
 {
-    public class DisputeOrderContext :
-        ByIntIdOperationContextBase<DisputeOrderCommand>,
-        ICommand<Task<HandlerResult<OrderStatus>>>
+    public class DisputeOrderContext : BaseOrderContext<DisputeOrderCommand>
     {
-        [Required]
-        public Order Order { get; }
-
-        public DisputeOrderContext(DisputeOrderCommand request, Order order)  : base(request)
-        {
-            this.Order = order;
-        }
+        public DisputeOrderContext(DisputeOrderCommand request, Order order) : base(request, order){ }
     }
 }

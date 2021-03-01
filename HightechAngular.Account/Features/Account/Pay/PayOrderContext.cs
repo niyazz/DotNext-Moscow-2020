@@ -1,4 +1,5 @@
 ﻿using Force.Cqrs;
+using HightechAngular.Core.Base;
 using HightechAngular.Core.Entities;
 using Infrastructure.Cqrs;
 using Infrastructure.OperationContext;
@@ -7,16 +8,8 @@ using System.Threading.Tasks;
 
 namespace HightechAngular.Account.Features.Account
 {
-    public class PayMyOrderContext :
-        ByIntIdOperationContextBase<PayMyOrderCommand>,
-        ICommand<Task<HandlerResult<OrderStatus>>>
+    public class PayMyOrderContext : BaseOrderContext<PayMyOrderCommand>
     {
-        [Required]
-        public Order Order { get; }
-
-        public PayMyOrderContext(PayMyOrderCommand request, Order order) : base(request)
-        {
-            Order = order;
-        }
+        public PayMyOrderContext(PayMyOrderCommand request, Order order) : base(request, order) { }
     }
 }

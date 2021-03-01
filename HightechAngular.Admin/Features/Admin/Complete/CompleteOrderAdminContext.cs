@@ -1,4 +1,5 @@
 ﻿using Force.Cqrs;
+using HightechAngular.Core.Base;
 using HightechAngular.Core.Entities;
 using Infrastructure.Cqrs;
 using Infrastructure.OperationContext;
@@ -7,16 +8,8 @@ using System.Threading.Tasks;
 
 namespace HightechAngular.Admin.Features.Admin
 {
-    public class CompleteOrderAdminContext :
-        ByIntIdOperationContextBase<CompleteOrderAdminCommand>,
-        ICommand<Task<HandlerResult<OrderStatus>>>
+    public class CompleteOrderAdminContext : BaseOrderContext<CompleteOrderAdminCommand>
     {
-        [Required]
-        public Order Order { get; }
-
-        public CompleteOrderAdminContext(CompleteOrderAdminCommand request, Order order) : base(request)
-        {
-            Order = order;
-        }
+        public CompleteOrderAdminContext(CompleteOrderAdminCommand request, Order order) : base(request, order) { }
     }
 }

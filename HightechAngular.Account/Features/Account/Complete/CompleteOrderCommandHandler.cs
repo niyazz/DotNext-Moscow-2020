@@ -13,8 +13,9 @@ namespace HightechAngular.Account.Features.Account
         public async Task<HandlerResult<OrderStatus>> Handle(CompleteOrderContext input)
         {
             await Task.Delay(1000);
-            var result = input.Order.BecomeComplete();
-            return new HandlerResult<OrderStatus>(result);
+            var shipState = new Order.OrderStates.Shipped(input.Order);
+            shipState.BecomeComplete();
+            return new HandlerResult<OrderStatus>(input.Order.Status);
         }
     }
 }
