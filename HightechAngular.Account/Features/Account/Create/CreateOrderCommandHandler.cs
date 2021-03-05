@@ -21,7 +21,6 @@ namespace HightechAngular.Account.Features.Account
         public int Handle(CreateOrderCommand input)
         {
             var order = new Order(_cartStorage.Cart);
-
             _unitOfWork.Add(order);
             _cartStorage.EmptyCart();
             _unitOfWork.Commit();

@@ -3,70 +3,67 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Infrastructure.Ddd.Domain.State;
 
 namespace HightechAngular.Core.Entities
 {
-    public partial class Order : HasIdBase
+    public partial class Order : HasStateBase<OrderStatus, Order.OrderStateBase>
     {
-        public class OrderStates
+        public abstract class OrderStateBase : SingleStateBase<Order, OrderStatus>
         {
-            private Order order;
+            protected OrderStateBase(Order entity) : base(entity){}
+        }
 
-            public OrderStates(Order order)
-            {
-                this.order = order;
-            }
+        /// <summary>
+        /// Represents new order, OrderStatus.New
+        /// </summary>
+        public class New : OrderStateBase
+        {
+            public New(Order entity) : base(entity) { }
+            public override OrderStatus EligibleStatus => OrderStatus.New;
+            public Paid BecomePaid() => Entity.To<Paid>(OrderStatus.Paid);
 
-            public OrderStates Create() =>
-                 order.Status switch
-                 {
-                     OrderStatus.New => new New(order),
-                     OrderStatus.Paid => new Paid(order),
-                     OrderStatus.Shipped => new Shipped(order),
-                     OrderStatus.Complete => new Complete(order),
-                     OrderStatus.Dispute => new Dispute(order),
-                     _ => throw new NotImplementedException($"Not supported status: {order.Status}"),
-                 };
+        }
 
-            public class New : OrderStates
-            {
-                public New(Order order) :base(order){}
-                public void BecomePaid()
-                {
-                    order.Status = OrderStatus.Paid;
-                }
-            }
+        /// <summary>
+        /// Represents paid order, OrderStatus.Paid
+        /// </summary>
+        public class Paid : OrderStateBase
+        {
+            public Paid(Order entity) : base(entity) { }
+            public override OrderStatus EligibleStatus => OrderStatus.Paid;
+            public Shipped BecomeShipped() => Entity.To<Shipped>(OrderStatus.Shipped);
+            
+        }
 
-            public class Paid : OrderStates
-            {
-                public Paid(Order order) : base(order){ }
-                public void BecomeShipped()
-                {
-                    order.Status = OrderStatus.Shipped;
-                }
-            }
+        /// <summary>
+        /// Represents shipped order, OrderStatus.Shipped
+        /// </summary>
+        public class Shipped : OrderStateBase
+        {
+            public Shipped(Order entity) : base(entity) { }
+            public override OrderStatus EligibleStatus => OrderStatus.New;
+            public Dispute BecomeDispute() => Entity.To<Dispute>(OrderStatus.Dispute);
+            public Complete BecomeComplete() => Entity.To<Complete>(OrderStatus.Dispute);
+        }
 
-            public class Shipped : OrderStates
-            {
-                public Shipped(Order order) : base(order) { }
-                public void BecomeComplete()
-                {
-                    order.Status = OrderStatus.Complete;
-                }
-                public void BecomeDispute()
-                {
-                    order.Status = OrderStatus.Dispute;
-                }
-            }
+        /// <summary>
+        /// Represents dispute order, OrderStatus.Dispute
+        /// </summary>
+        public class Dispute : OrderStateBase
+        {
+            public Dispute(Order entity) : base(entity) { }
+            public override OrderStatus EligibleStatus => OrderStatus.Dispute;
+            public Complete BecomeComplete() => Entity.To<Complete>(OrderStatus.Complete);
+        }
 
-            public class Complete : OrderStates
-            {
-                public Complete(Order order) : base(order) { }
-            }
-            public class Dispute : OrderStates
-            {
-                public Dispute(Order order) : base(order) { }
-            }
+        /// <summary>
+        /// Represents complete order, OrderStatus.Paid
+        /// </summary>
+        public class Complete : OrderStateBase
+        {
+            public Complete(Order entity) : base(entity) { }
+            public override OrderStatus EligibleStatus => OrderStatus.Complete;
         }
     }
 }

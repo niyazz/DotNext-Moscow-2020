@@ -8,16 +8,12 @@ namespace HightechAngular.Admin.Features.Admin
 {
     public class ShipOrderCommandHandler : ICommandHandler<ShipOrderContext, Task<HandlerResult<OrderStatus>>>
     {
-        private readonly IQueryable<Order> _orders;
-        public ShipOrderCommandHandler(IQueryable<Order> orders)
-        {
-            _orders = orders;
-        }
+        public ShipOrderCommandHandler() { }
         public async Task<HandlerResult<OrderStatus>> Handle(ShipOrderContext input)
         {
             await Task.Delay(1000);
-            var paidState = new Order.OrderStates.Paid(input.Order);
-            paidState.BecomeShipped();
+            var result = input.Order.With(
+                (Order.Paid paidOrder) => paidOrder.BecomeShipped());
             return new HandlerResult<OrderStatus>(input.Order.Status);
         }
     }

@@ -14,8 +14,8 @@ namespace HightechAngular.Account.Features.Account
         public async Task<HandlerResult<OrderStatus>> Handle(DisputeOrderContext input)
         {
             await Task.Delay(1000);
-            var shipState = new Order.OrderStates.Shipped(input.Order);
-            shipState.BecomeDispute();
+            var result = input.Order.With
+                ((Order.Shipped shippedOrder) => shippedOrder.BecomeDispute());
             return new HandlerResult<OrderStatus>(input.Order.Status);
         }
     }
