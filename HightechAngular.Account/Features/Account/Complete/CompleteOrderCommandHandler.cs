@@ -1,6 +1,7 @@
 ﻿using Force.Cqrs;
 using HightechAngular.Core.Entities;
 using Infrastructure.Cqrs;
+using Infrastructure.Workflow;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,9 @@ namespace HightechAngular.Account.Features.Account
             await Task.Delay(1000);
             var result = input.Order.With
                 ((Order.Dispute disputeOrder) => disputeOrder.BecomeComplete());
-            return new HandlerResult<OrderStatus>(result!.EligibleStatus);
+            return result == null 
+                ? new HandlerResult<OrderStatus>(FailureInfo.Invalid("Order is in invalid state")) 
+                : new HandlerResult<OrderStatus>(result.EligibleStatus);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Force.Cqrs;
 using HightechAngular.Core.Entities;
 using Infrastructure.Cqrs;
+using Infrastructure.Workflow;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,7 +21,9 @@ namespace HightechAngular.Admin.Features.Admin
             var result = input.Order.With
                 ((Order.New newOrder) => newOrder.BecomePaid());
             _unitOfWork.Commit();
-            return new HandlerResult<OrderStatus>(input.Order.Status);
+            return result == null
+              ? new HandlerResult<OrderStatus>(FailureInfo.Invalid("Order is in invalid state"))
+              : new HandlerResult<OrderStatus>(result.EligibleStatus);
         }
     }
 }
