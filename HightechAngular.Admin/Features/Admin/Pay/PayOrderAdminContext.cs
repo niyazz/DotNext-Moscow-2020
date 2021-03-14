@@ -10,6 +10,11 @@ namespace HightechAngular.Admin.Features.Admin
 {
     public class PayOrderAdminContext : BaseOrderContext<PayOrderAdminCommand>
     {
-        public PayOrderAdminContext(PayOrderAdminCommand request, Order order) : base(request, order) { }
+        public PayOrderAdminContext(PayOrderAdminCommand request, Order.New newOrder) : base(request) 
+        {
+            NewOrder = newOrder;
+        }
+        [Required]
+        public Order.New NewOrder { get; }
     }
 }

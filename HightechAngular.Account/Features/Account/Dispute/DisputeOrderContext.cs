@@ -10,6 +10,12 @@ namespace HightechAngular.Account.Features.Account
 {
     public class DisputeOrderContext : BaseOrderContext<DisputeOrderCommand>
     {
-        public DisputeOrderContext(DisputeOrderCommand request, Order order) : base(request, order){ }
+        public DisputeOrderContext(DisputeOrderCommand request, Order.Shipped shippedOrder) : base(request)
+        {
+            ShippedOrder = shippedOrder;
+        }
+        [Required]
+        public Order.Shipped ShippedOrder { get; }
+
     }
 }

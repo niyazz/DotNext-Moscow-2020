@@ -10,6 +10,12 @@ namespace HightechAngular.Account.Features.Account
 {
     public class PayMyOrderContext : BaseOrderContext<PayMyOrderCommand>
     {
-        public PayMyOrderContext(PayMyOrderCommand request, Order order) : base(request, order) { }
+        public PayMyOrderContext(PayMyOrderCommand request, Order.New newOrder) : base(request) 
+        {
+            NewOrder = newOrder;
+        }
+
+        [Required]
+        public Order.New NewOrder { get; }
     }
 }

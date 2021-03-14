@@ -14,11 +14,8 @@ namespace HightechAngular.Account.Features.Account
         public async Task<HandlerResult<OrderStatus>> Handle(CompleteOrderContext input)
         {
             await Task.Delay(1000);
-            var result = input.Order.With
-                ((Order.Dispute disputeOrder) => disputeOrder.BecomeComplete());
-            return result == null 
-                ? new HandlerResult<OrderStatus>(FailureInfo.Invalid("Order is in invalid state")) 
-                : new HandlerResult<OrderStatus>(result.EligibleStatus);
+            var result = input.DisputedOrder.BecomeComplete();
+            return new HandlerResult<OrderStatus>(result.EligibleStatus);
         }
     }
 }

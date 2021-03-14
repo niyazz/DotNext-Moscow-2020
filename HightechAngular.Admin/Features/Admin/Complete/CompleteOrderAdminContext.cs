@@ -10,6 +10,11 @@ namespace HightechAngular.Admin.Features.Admin
 {
     public class CompleteOrderAdminContext : BaseOrderContext<CompleteOrderAdminCommand>
     {
-        public CompleteOrderAdminContext(CompleteOrderAdminCommand request, Order order) : base(request, order) { }
+        public CompleteOrderAdminContext(CompleteOrderAdminCommand request, Order.Dispute disputeOrder) : base(request) 
+        {
+            DisputeOrder = disputeOrder;
+        }
+        [Required]
+        public Order.Dispute DisputeOrder { get; }
     }
 }

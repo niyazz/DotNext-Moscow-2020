@@ -11,13 +11,9 @@ namespace HightechAngular.Core.Base
     public class BaseOrderContext<T> :
         ByIntIdOperationContextBase<T>,
         ICommand<Task<HandlerResult<OrderStatus>>> where T: class, IHasId<int>
+        
     {
-        [Required]
-        public Order Order { get; }
-
-        public BaseOrderContext(T request, Order order) : base(request)
-        {
-            Order = order;
-        }
+        // через public TState State { get; }, пока не выйдет, поскольку IHasOrderState<TState> появляется на 7-ом шаге
+        public BaseOrderContext(T request) : base(request){}
     }
 }

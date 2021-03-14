@@ -18,12 +18,9 @@ namespace HightechAngular.Admin.Features.Admin
         public async Task<HandlerResult<OrderStatus>> Handle(PayOrderAdminContext input)
         {
             await Task.Delay(1000);
-            var result = input.Order.With
-                ((Order.New newOrder) => newOrder.BecomePaid());
+            var result = input.NewOrder.BecomePaid();
             _unitOfWork.Commit();
-            return result == null
-              ? new HandlerResult<OrderStatus>(FailureInfo.Invalid("Order is in invalid state"))
-              : new HandlerResult<OrderStatus>(result.EligibleStatus);
+            return  new HandlerResult<OrderStatus>(result!.EligibleStatus);
         }
     }
 }
